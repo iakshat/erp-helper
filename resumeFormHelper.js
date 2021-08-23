@@ -120,17 +120,8 @@ function initResumeForm(){
             document.getElementById(`${i+6}resume2`).value = "N";
             document.getElementById(`${i+6}resume3`).value = "N";
         }
-        addResumeTabs();
-
-        document.getElementById("saveprdata").addEventListener("click", handleSubmit);
-        window.addResumeTabs = addResumeTabs;
-
     }
 
-}
-
-function handleSubmit() {
-    window.parent.handleUpdate();
 }
 
 function handleTabChange(){
@@ -305,7 +296,7 @@ function beautifyCommons() {
     var table = document.getElementById("tab1")
     var tbody = table.getElementsByTagName("tbody")[0]
     var tr = tbody.getElementsByTagName("tr")
-    // console.log(tr)
+    console.log(tr)
     tr[0].setAttribute("style","display:flex;justify-content:space-around;padding:15px")
     var td1 = tr[0].getElementsByTagName("td")
     td1[2].setAttribute("style","display:none")
@@ -313,8 +304,7 @@ function beautifyCommons() {
 
     for( var j=1;j<=5;j++){
         temp(tr[j])
-    }
-    getElementByXpath("/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[7]").setAttribute("style","display:flex;justify-content:space-between");
+    }    
 }
 
 function beautifyCV1() {
@@ -323,9 +313,19 @@ function beautifyCV1() {
     var tr = tbody.getElementsByTagName("tr")[0]
     var td = tr.getElementsByTagName("td")
     console.log(td)
-    td[2].innerHTML=" Show Minor <br>CV1&nbsp;<select name='showminor1' id='showminor1' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-    td[3].innerHTML='Show Micro <br>CV1&nbsp;<select name="showmicro1" id="showmicro1"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+    var sel = td[2].getElementsByTagName("select")
+    sel[0].style.display=""
+    sel[1].style.display="none"
+    sel[2].style.display="none"
+
+
+    var sel1 = td[3].getElementsByTagName("select")
+    sel1[0].style.display=""
+    sel1[1].style.display="none"
+    sel1[2].style.display="none"
+
     var elms = document.querySelectorAll("[id='profTr']");
+
     for(var i=0;i<=9;i++){
         var td = elms[i].getElementsByTagName("td")
         td[4].style.display = "none";
@@ -346,8 +346,15 @@ function beautifyCV2() {
     var tbody = table.getElementsByTagName("tbody")[0]
     var tr = tbody.getElementsByTagName("tr")[0]
     var td = tr.getElementsByTagName("td")
-    td[2].innerHTML=" Show Minor <br>CV2&nbsp;<select name='showminor2' id='showminor2' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-    td[3].innerHTML='Show Micro <br>CV2&nbsp;<select name="showmicro2" id="showmicro2"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+    var sel = td[2].getElementsByTagName("select")
+    sel[1].style.display=""
+    sel[0].style.display="none"
+    sel[2].style.display="none"
+
+    var sel1 = td[3].getElementsByTagName("select")
+    sel1[1].style.display=""
+    sel1[0].style.display="none"
+    sel1[2].style.display="none"
     var elms = document.querySelectorAll("[id='profTr']");
     for(var i=10;i<=22;i++){
         var td = elms[i].getElementsByTagName("td")
@@ -362,8 +369,15 @@ function beautifyCV3() {
     var tbody = table.getElementsByTagName("tbody")[0]
     var tr = tbody.getElementsByTagName("tr")[0]
     var td = tr.getElementsByTagName("td")
-    td[2].innerHTML=" Show Minor <br>CV3&nbsp;<select name='showminor3' id='showminor3' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-    td[3].innerHTML='Show Micro <br>CV3&nbsp;<select name="showmicro3" id="showmicro3"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+    var sel = td[2].getElementsByTagName("select")
+    sel[2].style.display=""
+    sel[1].style.display="none"
+    sel[0].style.display="none"
+
+    var sel1 = td[3].getElementsByTagName("select")
+    sel1[2].style.display=""
+    sel1[1].style.display="none"
+    sel1[0].style.display="none"
     var elms = document.querySelectorAll("[id='profTr']");
     for(var i=21;i<=31;i++){
         var td = elms[i].getElementsByTagName("td")
@@ -374,3 +388,4 @@ function beautifyCV3() {
 }
 
 initResumeForm();
+addResumeTabs();
