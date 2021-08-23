@@ -120,6 +120,8 @@ function initResumeForm(){
             document.getElementById(`${i+6}resume2`).value = "N";
             document.getElementById(`${i+6}resume3`).value = "N";
         }
+        addResumeTabs();
+
     }
 
 }
@@ -308,6 +310,8 @@ function beautifyCommons() {
     var td2 = tr[6].getElementsByTagName("td")
     td2[0].setAttribute("style","text-align: left; display: block;padding-top:10px")
     td1[1].setAttribute("style","display: block")
+
+    getElementByXpath("/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[7]/td[2]").style.display.float = "left";
 }
 
 function beautifyCV1() {
@@ -342,4 +346,3 @@ function beautifyCV3() {
 }
 
 initResumeForm();
-addResumeTabs();

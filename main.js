@@ -8,7 +8,7 @@ console.log("hello kgp!");
 
 var lastMatch = 0;
 var intervalId = setInterval(() => {
-    // console.log("state: ", lastMatch)
+    // console.log("state: ", lastMatch);
     var myframe = document.getElementById("myframe") || document.getElementById("changed");
     var frameURL = myframe.contentWindow.location.href;
     if(frameURL.indexOf("TrainingPlacementSSO/StudentForm.jsp") != -1){
