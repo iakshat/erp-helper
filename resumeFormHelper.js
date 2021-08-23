@@ -271,6 +271,7 @@ function addResumeTabs(){
 }
 
 function beautifyTab() {
+    
     console.log("beautifying for", tabState);
     if(tabState == "commons")
         beautifyCommons();
@@ -304,10 +305,7 @@ function beautifyCommons() {
     for( var j=1;j<=5;j++){
         temp(tr[j])
     }
-
-    var td2 = tr[6].getElementsByTagName("td")
-    td2[0].setAttribute("style","text-align: left; display: block;padding-top:10px")
-    td1[1].setAttribute("style","display: block")
+    
 }
 
 function beautifyCV1() {
@@ -318,7 +316,20 @@ function beautifyCV1() {
     console.log(td)
     td[2].innerHTML=" Show Minor <br>CV1&nbsp;<select name='showminor1' id='showminor1' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
     td[3].innerHTML='Show Micro <br>CV1&nbsp;<select name="showmicro1" id="showmicro1"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-
+    var elms = document.querySelectorAll("[id='profTr']");
+    for(var i=0;i<=9;i++){
+        var td = elms[i].getElementsByTagName("td")
+        td[4].style.display = "none";
+        td[5].style.display = "none";
+        td[6].style.display = "none";
+    }
+    table = document.getElementById("profTab")
+    tbody = table.getElementsByTagName("tbody")[0]
+    tr = tbody.getElementsByTagName("tr")[0]
+    var th = tr.getElementsByTagName("th")
+    th[4].style.display = "none";
+    th[5].style.display = "none";
+    th[6].style.display = "none";
 }
 
 function beautifyCV2() {
@@ -328,7 +339,13 @@ function beautifyCV2() {
     var td = tr.getElementsByTagName("td")
     td[2].innerHTML=" Show Minor <br>CV2&nbsp;<select name='showminor2' id='showminor2' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
     td[3].innerHTML='Show Micro <br>CV2&nbsp;<select name="showmicro2" id="showmicro2"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-
+    var elms = document.querySelectorAll("[id='profTr']");
+    for(var i=10;i<=22;i++){
+        var td = elms[i].getElementsByTagName("td")
+        td[4].style.display = "none";
+        td[5].style.display = "none";
+        td[6].style.display = "none";
+    }
 }
 
 function beautifyCV3() {
@@ -338,7 +355,13 @@ function beautifyCV3() {
     var td = tr.getElementsByTagName("td")
     td[2].innerHTML=" Show Minor <br>CV3&nbsp;<select name='showminor3' id='showminor3' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
     td[3].innerHTML='Show Micro <br>CV3&nbsp;<select name="showmicro3" id="showmicro3"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-
+    var elms = document.querySelectorAll("[id='profTr']");
+    for(var i=21;i<=31;i++){
+        var td = elms[i].getElementsByTagName("td")
+        td[4].style.display = "none";
+        td[5].style.display = "none";
+        td[6].style.display = "none";
+    }
 }
 
 initResumeForm();
