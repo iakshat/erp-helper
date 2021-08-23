@@ -24,8 +24,7 @@ var tabMap = {
     },
     "cv1": {
         "ids": [
-            "showminor1",
-            "showmicro1",
+            
             "profTab",
             
         ],
@@ -44,8 +43,7 @@ var tabMap = {
     },
     "cv2": {
         "ids": [
-            "showminor2",
-            "showmicro2",
+            
             "profTab",
             
         ],
@@ -64,8 +62,7 @@ var tabMap = {
     },
     "cv3": {
         "ids": [
-            "showminor3",
-            "showmicro3",
+            
             "profTab",
 
         ],
@@ -129,6 +126,7 @@ function initResumeForm(){
 
 function handleTabChange(){
     tabState = document.querySelector('input[name="tab"]:checked').value
+    console.log("tabstate")
     refreshTab();
 }
 
@@ -141,13 +139,14 @@ function refreshTab(){
     for(var t in tabMap) {
         var show = "none";
         for(var elem of tabMap[t].ids){
+            console.log(elem)
             document.getElementById(elem).style.display = show;
         }
         for(var elem of tabMap[t].xpaths){
             getElementByXpath(elem).style.display = show;
         }
     }
-    var show = "block";
+    var show = "";
     for(var elem of tabMap[tabState].ids){
         document.getElementById(elem).style.display = show;
     }
@@ -158,7 +157,7 @@ function refreshTab(){
     for(var t in allotedBlocks) {
         var show = "none";
         if(t === tabState){
-            show = "block";
+            show = "";
         }
         for(var elem of allotedBlocks[t]){
             elem.style.display = show;
@@ -307,20 +306,39 @@ function beautifyCommons() {
     }
 
     var td2 = tr[6].getElementsByTagName("td")
-    td2[0].setAttribute("style","text-align: left; display: block;padding-left:50px;padding-top:10px")
-    td1[1].setAttribute("style","display: block;padding-left:25px")
+    td2[0].setAttribute("style","text-align: left; display: block;padding-top:10px")
+    td1[1].setAttribute("style","display: block")
 }
 
 function beautifyCV1() {
-    
+    var table = document.getElementById("tab1")
+    var tbody = table.getElementsByTagName("tbody")[0]
+    var tr = tbody.getElementsByTagName("tr")[0]
+    var td = tr.getElementsByTagName("td")
+    console.log(td)
+    td[2].innerHTML=" Show Minor <br>CV1&nbsp;<select name='showminor1' id='showminor1' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
+    td[3].innerHTML='Show Micro <br>CV1&nbsp;<select name="showmicro1" id="showmicro1"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+
 }
 
 function beautifyCV2() {
-    
+    var table = document.getElementById("tab1")
+    var tbody = table.getElementsByTagName("tbody")[0]
+    var tr = tbody.getElementsByTagName("tr")[0]
+    var td = tr.getElementsByTagName("td")
+    td[2].innerHTML=" Show Minor <br>CV2&nbsp;<select name='showminor2' id='showminor2' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
+    td[3].innerHTML='Show Micro <br>CV2&nbsp;<select name="showmicro2" id="showmicro2"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+
 }
 
 function beautifyCV3() {
-    
+    var table = document.getElementById("tab1")
+    var tbody = table.getElementsByTagName("tbody")[0]
+    var tr = tbody.getElementsByTagName("tr")[0]
+    var td = tr.getElementsByTagName("td")
+    td[2].innerHTML=" Show Minor <br>CV3&nbsp;<select name='showminor3' id='showminor3' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
+    td[3].innerHTML='Show Micro <br>CV3&nbsp;<select name="showmicro3" id="showmicro3"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+
 }
 
 initResumeForm();
