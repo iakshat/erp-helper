@@ -26,9 +26,12 @@ var tabMap = {
         "ids": [
             "showminor1",
             "showmicro1",
+            "profTab",
             
         ],
         "xpaths": [
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[3]",
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[4]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[7]/td[3]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[7]/td[4]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[9]/td[1]",
@@ -43,9 +46,12 @@ var tabMap = {
         "ids": [
             "showminor2",
             "showmicro2",
+            "profTab",
             
         ],
         "xpaths": [
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[3]",
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[4]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[8]/td[1]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[8]/td[2]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[9]/td[3]",
@@ -60,9 +66,12 @@ var tabMap = {
         "ids": [
             "showminor3",
             "showmicro3",
+            "profTab",
 
         ],
         "xpaths": [
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[3]",
+            "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[4]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[8]/td[3]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[8]/td[4]",
             "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[10]/td[1]",
@@ -156,7 +165,7 @@ function refreshTab(){
         }
     }
     getElementByXpath("/html/body/div/form/table").removeAttribute("style");
-
+    beautifyTab();
 }
 
 function addResumeTabs(){
@@ -259,11 +268,11 @@ function addResumeTabs(){
     document.getElementById("from2_stu").insertAdjacentElement('afterbegin', bar);
 
     refreshTab();
-    beautifyTab();
 
 }
 
 function beautifyTab() {
+    console.log("beautifying for", tabState);
     if(tabState == "commons")
         beautifyCommons();
     if(tabState == "cv1")
@@ -279,15 +288,15 @@ function beautifyCommons() {
 }
 
 function beautifyCV1() {
-
+    
 }
 
 function beautifyCV2() {
-
+    
 }
 
 function beautifyCV3() {
-
+    
 }
 
 initResumeForm();
