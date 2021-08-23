@@ -120,18 +120,18 @@ function initResumeForm(){
             document.getElementById(`${i+6}resume2`).value = "N";
             document.getElementById(`${i+6}resume3`).value = "N";
         }
-        addResumeTabs();
+            addResumeTabs();
 
-        document.getElementById("saveprdata").addEventListener("click", handleSubmit);
-        window.addResumeTabs = addResumeTabs;
+            document.getElementById("saveprdata").addEventListener("click", handleSubmit);
+            window.addResumeTabs = addResumeTabs;
 
     }
 
 }
 
-function handleSubmit() {
-    window.parent.handleUpdate();
-}
+    function handleSubmit() {
+        window.parent.handleUpdate();
+    }
 
 function handleTabChange(){
     tabState = document.querySelector('input[name="tab"]:checked').value
