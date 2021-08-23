@@ -243,7 +243,8 @@ function setupResumeForm(){
             },
             "cv1": {
                 "ids": [
-                    
+                    "showminor1",
+                    "showmicro1",
                     "profTab",
                     
                 ],
@@ -262,7 +263,8 @@ function setupResumeForm(){
             },
             "cv2": {
                 "ids": [
-                    
+                    "showminor2",
+                    "showmicro2",
                     "profTab",
                     
                 ],
@@ -281,7 +283,8 @@ function setupResumeForm(){
             },
             "cv3": {
                 "ids": [
-                    
+                    "showminor3",
+                    "showmicro3",
                     "profTab",
         
                 ],
@@ -524,7 +527,7 @@ function setupResumeForm(){
             var table = document.getElementById("tab1")
             var tbody = table.getElementsByTagName("tbody")[0]
             var tr = tbody.getElementsByTagName("tr")
-            console.log(tr)
+            // console.log(tr)
             tr[0].setAttribute("style","display:flex;justify-content:space-around;padding:15px")
             var td1 = tr[0].getElementsByTagName("td")
             td1[2].setAttribute("style","display:none")
@@ -532,7 +535,17 @@ function setupResumeForm(){
         
             for( var j=1;j<=5;j++){
                 temp(tr[j])
-            }
+            }   
+            for(var j =6;j<=9;j++){
+                tr[j].style.display="flex"
+                tr[j].style.textAlign="center"
+                tr[j].style.padding="5px"
+                var te = tr[j].getElementsByTagName("td")
+                for(var i=0;i<4;i+=2){
+                    te[i].style.width="200px"
+                    te[i].style.textAlign="center"
+                }   
+            } 
         }
         
         function beautifyCV1() {
@@ -541,8 +554,7 @@ function setupResumeForm(){
             var tr = tbody.getElementsByTagName("tr")[0]
             var td = tr.getElementsByTagName("td")
             console.log(td)
-            td[2].innerHTML=" Show Minor <br>CV1&nbsp;<select name='showminor1' id='showminor1' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-            td[3].innerHTML='Show Micro <br>CV1&nbsp;<select name="showmicro1" id="showmicro1"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
+        
             var elms = document.querySelectorAll("[id='profTr']");
             for(var i=0;i<=9;i++){
                 var td = elms[i].getElementsByTagName("td")
@@ -564,8 +576,6 @@ function setupResumeForm(){
             var tbody = table.getElementsByTagName("tbody")[0]
             var tr = tbody.getElementsByTagName("tr")[0]
             var td = tr.getElementsByTagName("td")
-            td[2].innerHTML=" Show Minor <br>CV2&nbsp;<select name='showminor2' id='showminor2' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-            td[3].innerHTML='Show Micro <br>CV2&nbsp;<select name="showmicro2" id="showmicro2"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
             var elms = document.querySelectorAll("[id='profTr']");
             for(var i=10;i<=22;i++){
                 var td = elms[i].getElementsByTagName("td")
@@ -580,8 +590,6 @@ function setupResumeForm(){
             var tbody = table.getElementsByTagName("tbody")[0]
             var tr = tbody.getElementsByTagName("tr")[0]
             var td = tr.getElementsByTagName("td")
-            td[2].innerHTML=" Show Minor <br>CV3&nbsp;<select name='showminor3' id='showminor3' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
-            td[3].innerHTML='Show Micro <br>CV3&nbsp;<select name="showmicro3" id="showmicro3"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
             var elms = document.querySelectorAll("[id='profTr']");
             for(var i=21;i<=31;i++){
                 var td = elms[i].getElementsByTagName("td")
