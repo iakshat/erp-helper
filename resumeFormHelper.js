@@ -304,7 +304,17 @@ function beautifyCommons() {
 
     for( var j=1;j<=5;j++){
         temp(tr[j])
-    }    
+    }   
+    for(var j =6;j<=9;j++){
+        tr[j].style.display="flex"
+        tr[j].style.textAlign="center"
+        tr[j].style.padding="5px"
+        var te = tr[j].getElementsByTagName("td")
+        for(var i=0;i<4;i+=2){
+            te[i].style.width="200px"
+            te[i].style.textAlign="center"
+        }   
+    } 
 }
 
 function beautifyCV1() {
