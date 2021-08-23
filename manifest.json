@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "ERP Helper",
+    "version": "1.0",
+
+    "description": "Helps out with IIT Kgp ERP",
+
+    "content_scripts": [
+      {
+        "matches": ["*://erp.iitkgp.ac.in/*"],
+        "js": ["main.js", "resumeHelper.js"]
+      }
+    ]
+  }
