@@ -12,7 +12,8 @@ function startResumeHelper(){
             setTimeout(() => {
                 console.log("refitting after update");
                 var resumeframe = document.getElementById("resumeIframe");
-                resumeframe.src = resumeframe.src;
+                if(resumeframe)
+                    resumeframe.src = resumeframe.src;
                 const event = new Event('setup');
                 document.dispatchEvent(event);
             }, 8000);
