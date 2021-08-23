@@ -4,10 +4,27 @@ var tabState = "commons"
 function startResumeHelper(){
 
     console.log("fucking things up!");
+
+    var hu = document.createElement("script");
+    hu.textContent = `
+        function handleUpdate() {
+            console.log("handling update...");
+            setTimeout(() => {
+                console.log("refitting after update");
+                var resumeframe = document.getElementById("resumeIframe");
+                resumeframe.src = resumeframe.src;
+                const event = new Event('setup');
+                document.dispatchEvent(event);
+            }, 5000);
+        }
+    `;
+    document.body.insertAdjacentElement('afterbegin',hu);
+    document.addEventListener('setup', setupResumeForm);
+    // window.handleUpdate = handleUpdate;
     addToggleButton();
     initFormShape();
     addResumeView();
-    setTimeout(setupResumeForm, 5000);
+    setTimeout(setupResumeForm, 3000);
 }
 
 function addToggleButton(){
@@ -320,10 +337,17 @@ function setupResumeForm(){
                     document.getElementById(\`\${i+6}resume2\`).value = "N";
                     document.getElementById(\`\${i+6}resume3\`).value = "N";
                 }
+                addResumeTabs();
+
+                document.getElementById("saveprdata").addEventListener("click", handleSubmit);
+                window.addResumeTabs = addResumeTabs;
+
             }
 
-            addResumeTabs();
-        
+        }
+
+        function handleSubmit() {
+            window.parent.handleUpdate();
         }
         
         function handleTabChange(){
@@ -473,6 +497,7 @@ function setupResumeForm(){
         }
         
         function beautifyTab() {
+            
             console.log("beautifying for", tabState);
             if(tabState == "commons")
                 beautifyCommons();
@@ -506,10 +531,6 @@ function setupResumeForm(){
             for( var j=1;j<=5;j++){
                 temp(tr[j])
             }
-        
-            var td2 = tr[6].getElementsByTagName("td")
-            td2[0].setAttribute("style","text-align: left; display: block;padding-top:10px")
-            td1[1].setAttribute("style","display: block")
         }
         
         function beautifyCV1() {
@@ -520,7 +541,20 @@ function setupResumeForm(){
             console.log(td)
             td[2].innerHTML=" Show Minor <br>CV1&nbsp;<select name='showminor1' id='showminor1' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
             td[3].innerHTML='Show Micro <br>CV1&nbsp;<select name="showmicro1" id="showmicro1"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-        
+            var elms = document.querySelectorAll("[id='profTr']");
+            for(var i=0;i<=9;i++){
+                var td = elms[i].getElementsByTagName("td")
+                td[4].style.display = "none";
+                td[5].style.display = "none";
+                td[6].style.display = "none";
+            }
+            table = document.getElementById("profTab")
+            tbody = table.getElementsByTagName("tbody")[0]
+            tr = tbody.getElementsByTagName("tr")[0]
+            var th = tr.getElementsByTagName("th")
+            th[4].style.display = "none";
+            th[5].style.display = "none";
+            th[6].style.display = "none";
         }
         
         function beautifyCV2() {
@@ -530,7 +564,13 @@ function setupResumeForm(){
             var td = tr.getElementsByTagName("td")
             td[2].innerHTML=" Show Minor <br>CV2&nbsp;<select name='showminor2' id='showminor2' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
             td[3].innerHTML='Show Micro <br>CV2&nbsp;<select name="showmicro2" id="showmicro2"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-        
+            var elms = document.querySelectorAll("[id='profTr']");
+            for(var i=10;i<=22;i++){
+                var td = elms[i].getElementsByTagName("td")
+                td[4].style.display = "none";
+                td[5].style.display = "none";
+                td[6].style.display = "none";
+            }
         }
         
         function beautifyCV3() {
@@ -540,10 +580,17 @@ function setupResumeForm(){
             var td = tr.getElementsByTagName("td")
             td[2].innerHTML=" Show Minor <br>CV3&nbsp;<select name='showminor3' id='showminor3' ><option value='Y' selected=''>Y</option><option value='N'>N</option></select>"
             td[3].innerHTML='Show Micro <br>CV3&nbsp;<select name="showmicro3" id="showmicro3"><option value="Y" selected="">Y</option><option value="N">N</option></select>'
-        
+            var elms = document.querySelectorAll("[id='profTr']");
+            for(var i=21;i<=31;i++){
+                var td = elms[i].getElementsByTagName("td")
+                td[4].style.display = "none";
+                td[5].style.display = "none";
+                td[6].style.display = "none";
+            }
         }
         
         initResumeForm();
+        
     `
     document.getElementById("changed").contentDocument.body.insertAdjacentElement('afterbegin',sc);
 }
