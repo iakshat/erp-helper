@@ -283,8 +283,32 @@ function beautifyTab() {
         beautifyCV3();
 }
 
-function beautifyCommons() {
+function temp(x){
+    x.setAttribute("style","display:flex;justify-content:space-between")
+    var td = x.getElementsByTagName("td")
+    td[0].setAttribute("style","width:110px;text-align:left")
+    td[1].setAttribute("style","width:230px")
+    td[2].setAttribute("style","width:110px;text-align:left")
+    td[3].setAttribute("style","width:230px")
+}
 
+function beautifyCommons() {
+    var table = document.getElementById("tab1")
+    var tbody = table.getElementsByTagName("tbody")[0]
+    var tr = tbody.getElementsByTagName("tr")
+    console.log(tr)
+    tr[0].setAttribute("style","display:flex;justify-content:space-around;padding:15px")
+    var td1 = tr[0].getElementsByTagName("td")
+    td1[2].setAttribute("style","display:none")
+    td1[3].setAttribute("style","display:none")
+
+    for( var j=1;j<=5;j++){
+        temp(tr[j])
+    }
+
+    var td2 = tr[6].getElementsByTagName("td")
+    td2[0].setAttribute("style","text-align: left; display: block;padding-left:50px;padding-top:10px")
+    td1[1].setAttribute("style","display: block;padding-left:25px")
 }
 
 function beautifyCV1() {
