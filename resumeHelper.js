@@ -15,7 +15,7 @@ function startResumeHelper(){
                 resumeframe.src = resumeframe.src;
                 const event = new Event('setup');
                 document.dispatchEvent(event);
-            }, 5000);
+            }, 8000);
         }
     `;
     document.body.insertAdjacentElement('afterbegin',hu);
@@ -188,7 +188,7 @@ function removeResumeView() {
     var myframe = document.getElementById("myframe") || document.getElementById("changed");
     myframe.style.paddingBottom = "500px";
     myframe.style.width = "100vw";
-    myframe.style.height = "100vh";
+    myframe.style.height = "3000px";
     myframe.parentElement.style.height = "100vh";
     if(document.getElementById("resumeIframe")){
         document.getElementById("resumeIframe").remove();
@@ -205,6 +205,7 @@ function reshapeForm() {
     var myframe = document.getElementById("myframe") || document.getElementById("changed");
     myframe.style.paddingBottom = "0";
     myframe.style.width = "50vw";
+    myframe.style.height = "100vh";
 }
 
 function reloadIframe(frame) {
