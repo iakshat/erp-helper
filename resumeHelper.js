@@ -23,9 +23,26 @@ function startResumeHelper(){
     document.addEventListener('setup', setupResumeForm);
     // window.handleUpdate = handleUpdate;
     addToggleButton();
+    addRefreshButton();
     initFormShape();
     addResumeView();
     setTimeout(setupResumeForm, 3000);
+}
+
+function addRefreshButton(){
+    if(document.getElementsByClassName("refreshExtn").length){
+        document.getElementsByClassName("refreshExtn")[0].remove();
+    }
+    var refreshButton = document.createElement("button");
+    refreshButton.innerHTML = "Reload Extension";
+    refreshButton.id = "refreshExtn";
+    refreshButton.onclick = () => {
+        setupResumeForm();
+        var resumeframe = document.getElementById("resumeIframe");
+        if(resumeframe)
+            resumeframe.src = resumeframe.src;
+    }
+    document.getElementsByClassName("breadcrumb")[0].insertAdjacentElement('afterend',refreshButton);
 }
 
 function addToggleButton(){
@@ -238,7 +255,7 @@ function setupResumeForm(){
                     "/html/body/div/form/table/tbody/tr[6]/td/table/tbody/tr/td/table/tbody/tr[2]",
                     "/html/body/div/form/table/tbody/tr[6]/td/table/tbody/tr/td/table/tbody/tr[3]",
                     "/html/body/div/form/table/tbody/tr[6]/td/table/tbody/tr/td/table/tbody/tr[4]",
-        
+
                 ]
             },
             "cv1": {
@@ -286,7 +303,7 @@ function setupResumeForm(){
                     "showminor3",
                     "showmicro3",
                     "profTab",
-        
+
                 ],
                 "xpaths": [
                     "/html/body/div/form/table/tbody/tr[5]/td/table/tbody/tr[1]/td[3]",
@@ -302,17 +319,25 @@ function setupResumeForm(){
                 ]
             }
         }
-        
+
         var allotedBlocks = {
             "cv1": [],
             "cv2": [],
             "cv3": [],
             "extras": [],
         }
-        
+
         function initResumeForm(){
-        
-            if(confirm("We need to make changes to individual cv visibility of blocks. Continue?")){
+
+            var changeSettings = localStorage.getItem("ERPHelperChangeSettings");
+            if(!changeSettings){
+                if(confirm("We need to make changes to individual cv visibility of blocks. Continue?")){
+                    localStorage.setItem("ERPHelperChangeSettings","true");
+                    changeSettings = true;
+                }
+            }
+
+            if(changeSettings){
                 var blocks = document.querySelectorAll(\`[id=\${itemId}]\`);
                 for(var i = 0; i < 10; i++){
                     allotedBlocks.cv1.push(blocks[i]);
@@ -322,17 +347,17 @@ function setupResumeForm(){
                 for(var i = 30; i < 50; i++){
                     allotedBlocks.extras.push(blocks[i]);
                 }
-        
+
                 for(var j = 0; j < 10; j++){
                     var i=j+1;
                     document.getElementById(\`\${i+6}resume1\`).value = "Y";
                     document.getElementById(\`\${i+6}resume2\`).value = "N";
                     document.getElementById(\`\${i+6}resume3\`).value = "N";
-        
+
                     document.getElementById(\`\${i+16}resume1\`).value = "N";
                     document.getElementById(\`\${i+16}resume2\`).value = "Y";
                     document.getElementById(\`\${i+16}resume3\`).value = "N";
-        
+
                     document.getElementById(\`\${i+26}resume1\`).value = "N";
                     document.getElementById(\`\${i+26}resume2\`).value = "N";
                     document.getElementById(\`\${i+26}resume3\`).value = "Y";
@@ -354,17 +379,17 @@ function setupResumeForm(){
         function handleSubmit() {
             window.parent.handleUpdate();
         }
-        
+
         function handleTabChange(){
             tabState = document.querySelector('input[name="tab"]:checked').value
             console.log("tabstate")
             refreshTab();
         }
-        
+
         function getElementByXpath(path) {
             return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         }
-        
+
         function refreshTab(){
             console.log("refreshing tabs with state", tabState);
             for(var t in tabMap) {
@@ -384,7 +409,7 @@ function setupResumeForm(){
             for(var elem of tabMap[tabState].xpaths){
                 getElementByXpath(elem).style.display = show;
             }
-        
+
             for(var t in allotedBlocks) {
                 var show = "none";
                 if(t === tabState){
@@ -397,9 +422,9 @@ function setupResumeForm(){
             getElementByXpath("/html/body/div/form/table").removeAttribute("style");
             beautifyTab();
         }
-        
+
         function addResumeTabs(){
-        
+
             var css = document.createElement("style");
             css.textContent = \`
                 .stv-radio-tabs-wrapper {
@@ -410,7 +435,7 @@ function setupResumeForm(){
                     padding: 0 10px;
                     position: relative;
                 }
-        
+
                 input.stv-radio-tab {
                     position: absolute;
                     left: -99999em;
@@ -437,12 +462,12 @@ function setupResumeForm(){
                 }
             \`
             document.head.appendChild(css);
-        
+
             var bar = document.createElement("div");
             bar.style.width = "100%"
             bar.id = "bar";
             bar.className = "stv-radio-tabs-wrapper";
-        
+
             var c = document.createElement("input");
             c.type = "radio";
             c.value = "commons";
@@ -492,15 +517,15 @@ function setupResumeForm(){
             l.setAttribute("for", "cv3");
             l.textContent = "cv3";
             bar.appendChild(l);
-        
+
             if(document.getElementById("bar"))
                 document.getElementById("bar").remove();
             document.getElementById("from2_stu").insertAdjacentElement('afterbegin', bar);
-        
+
             refreshTab();
-        
+
         }
-        
+
         function beautifyTab() {
             
             console.log("beautifying for", tabState);
@@ -513,7 +538,7 @@ function setupResumeForm(){
             if(tabState == "cv3")
                 beautifyCV3();
         }
-        
+
         function temp(x){
             x.setAttribute("style","display:flex;justify-content:space-between")
             var td = x.getElementsByTagName("td")
@@ -522,7 +547,7 @@ function setupResumeForm(){
             td[2].setAttribute("style","width:110px;text-align:left")
             td[3].setAttribute("style","width:230px")
         }
-        
+
         function beautifyCommons() {
             var table = document.getElementById("tab1")
             var tbody = table.getElementsByTagName("tbody")[0]
@@ -532,7 +557,7 @@ function setupResumeForm(){
             var td1 = tr[0].getElementsByTagName("td")
             td1[2].setAttribute("style","display:none")
             td1[3].setAttribute("style","display:none")
-        
+
             for( var j=1;j<=5;j++){
                 temp(tr[j])
             }   
@@ -547,14 +572,14 @@ function setupResumeForm(){
                 }   
             } 
         }
-        
+
         function beautifyCV1() {
             var table = document.getElementById("tab1")
             var tbody = table.getElementsByTagName("tbody")[0]
             var tr = tbody.getElementsByTagName("tr")[0]
             var td = tr.getElementsByTagName("td")
             console.log(td)
-        
+
             var elms = document.querySelectorAll("[id='profTr']");
             for(var i=0;i<=9;i++){
                 var td = elms[i].getElementsByTagName("td")
@@ -570,7 +595,7 @@ function setupResumeForm(){
             th[5].style.display = "none";
             th[6].style.display = "none";
         }
-        
+
         function beautifyCV2() {
             var table = document.getElementById("tab1")
             var tbody = table.getElementsByTagName("tbody")[0]
@@ -584,7 +609,7 @@ function setupResumeForm(){
                 td[6].style.display = "none";
             }
         }
-        
+
         function beautifyCV3() {
             var table = document.getElementById("tab1")
             var tbody = table.getElementsByTagName("tbody")[0]
@@ -598,9 +623,8 @@ function setupResumeForm(){
                 td[6].style.display = "none";
             }
         }
-        
+
         initResumeForm();
-        
     `
     document.getElementById("changed").contentDocument.body.insertAdjacentElement('afterbegin',sc);
 }

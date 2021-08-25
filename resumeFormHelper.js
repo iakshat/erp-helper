@@ -93,7 +93,15 @@ var allotedBlocks = {
 
 function initResumeForm(){
 
-    if(confirm("We need to make changes to individual cv visibility of blocks. Continue?")){
+    var changeSettings = localStorage.getItem("ERPHelperChangeSettings");
+    if(!changeSettings){
+        if(confirm("We need to make changes to individual cv visibility of blocks. Continue?")){
+            localStorage.setItem("ERPHelperChangeSettings","true");
+            changeSettings = true;
+        }
+    }
+
+    if(changeSettings){
         var blocks = document.querySelectorAll(`[id=${itemId}]`);
         for(var i = 0; i < 10; i++){
             allotedBlocks.cv1.push(blocks[i]);
